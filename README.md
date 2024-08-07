@@ -14,4 +14,8 @@ simplified app for  IMS (Inventory Management System )
 ## diagramme de cas d'utilisation : 
 ![MicrosoftTeams-image](https://github.com/user-attachments/assets/7f751ed1-2425-4431-aba5-c01921bd1453)
 
+## diagramme de classes :
+
+![diagramme de classe IMS drawio](https://github.com/user-attachments/assets/68db6554-85a8-49f8-80f5-528b0b1680f8)
+
 
