@@ -10,3 +10,8 @@ simplified app for  IMS (Inventory Management System )
 ## 4- preparation du backend (+dockerisation)
 ## 5-preparation des APIs et tests 
 
+
+## diagramme de cas d'utilisation : 
+![MicrosoftTeams-image](https://github.com/user-attachments/assets/7f751ed1-2425-4431-aba5-c01921bd1453)
+
+
