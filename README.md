@@ -5,7 +5,8 @@ simplified app for  IMS (Inventory Management System )
 
 # etapes :
 ## 1- conception UML : diagrammes de classes/ diagrammes de cas d'utilisation 
-## 2- preparation de la base de données mysql 
-## 3- preparation du backend (+dockerisation)
-## 4-preparation des APIs et tests 
+## 2- prepare workflows (CI/CD pipeline)
+## 3- preparation de la base de données mysql 
+## 4- preparation du backend (+dockerisation)
+## 5-preparation des APIs et tests 
 
