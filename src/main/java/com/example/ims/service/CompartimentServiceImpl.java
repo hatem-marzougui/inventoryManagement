@@ -42,4 +42,23 @@ public class CompartimentServiceImpl implements CompartimentService {
         compartimentRepository.delete(compartiment);
         return compartiment;
     }
+
+    @Override
+    public Compartiment updateCompartimentById(Integer id,CompartimentRequestDTO compartimentRequestDTO){
+        Compartiment compartiment = compartimentRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Compartiment with id " + id + " not found"));
+
+        // Update fields
+        if (compartimentRequestDTO.getName() != null) {
+            compartiment.setName(compartimentRequestDTO.getName());
+        }
+        if (compartimentRequestDTO.getCapacity() != null) {
+            compartiment.setCapacity(compartimentRequestDTO.getCapacity());
+        }
+        if (compartimentRequestDTO.getAvailablePlace() != null) {
+            compartiment.setAvailablePlace(compartimentRequestDTO.getAvailablePlace());
+        }
+
+        return compartimentRepository.save(compartiment);
+    }
 }

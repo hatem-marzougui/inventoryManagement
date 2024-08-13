@@ -12,4 +12,6 @@ public interface CompartimentService {
     Compartiment createCompartiment(CompartimentRequestDTO compartimentRequestDTO);
 
     Compartiment deleteCompartimentById(Integer id);
+
+    Compartiment updateCompartimentById(Integer id, CompartimentRequestDTO compartimentRequestDTO);
 }

@@ -67,6 +67,20 @@ public class CompartimentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500 Internal Server Error for any other exceptions
         }
 
+    }
+
+    @PutMapping("/compartiment/{id}")
+    public ResponseEntity<Object> updateCompartimentById(@PathVariable Integer id,@RequestBody CompartimentRequestDTO compartimentRequestDTO) {
+
+        try {
+            Compartiment updatedCompartiment = compartimentService.updateCompartimentById(id,compartimentRequestDTO);
+            return new ResponseEntity<>(updatedCompartiment, HttpStatus.OK);
+        } catch (NoSuchElementException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500 Internal Server Error for any other exceptions
+        }
 
     }
 }
+
