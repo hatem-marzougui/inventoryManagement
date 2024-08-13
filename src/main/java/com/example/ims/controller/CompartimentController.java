@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.ims.service.CompartimentService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 //@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -39,7 +40,6 @@ public class CompartimentController {
     }
 
 
-
     //post compartiment : /compartiment
     @PostMapping("/compartiment")
     @ResponseBody
@@ -54,4 +54,19 @@ public class CompartimentController {
     }
 
 
+    // Delete compartiment :/compartiment
+    @DeleteMapping("/compartiment/{id}")
+    public ResponseEntity<Object> deleteCompartimentById(@PathVariable Integer id) {
+
+        try {
+            Compartiment deletedCompartiment = compartimentService.deleteCompartimentById(id);
+            return new ResponseEntity<>(deletedCompartiment, HttpStatus.OK);
+        } catch (NoSuchElementException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found
+        } catch (Exception ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500 Internal Server Error for any other exceptions
+        }
+
+
+    }
 }

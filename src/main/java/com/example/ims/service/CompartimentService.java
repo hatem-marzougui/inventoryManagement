@@ -10,4 +10,6 @@ public interface CompartimentService {
     List<Compartiment> getAllCompartiments();
 
     Compartiment createCompartiment(CompartimentRequestDTO compartimentRequestDTO);
+
+    Compartiment deleteCompartimentById(Integer id);
 }

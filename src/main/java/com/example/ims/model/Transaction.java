@@ -23,6 +23,8 @@ public class Transaction {
     private TransactionType transactionType;
 
     @ManyToOne
+    //name = "employeeId" :   la clé étrangère pointant vers l'entité Employee.
+    //referencedColumnName = "id": la colonne id dans la table de l'entité Employee
     @JoinColumn(name = "employeeId", referencedColumnName = "id", insertable = false, updatable = false)
     private Employee employee;
 
