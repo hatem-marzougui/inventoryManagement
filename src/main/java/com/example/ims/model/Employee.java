@@ -20,7 +20,7 @@ public class Employee {
 
     //one to many relationship with the transaction
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
     private List<Transaction> transactions;
 
     public Employee() {
@@ -55,5 +55,14 @@ public class Employee {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
