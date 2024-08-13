@@ -1,8 +1,10 @@
 package com.example.ims.controller;
 
 
-import com.example.ims.dto.CompartimentRequestDTO;
+import com.example.ims.dto.CompartimentCreateDTO;
+import com.example.ims.dto.CompartimentUpdateDTO;
 import com.example.ims.model.Compartiment;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +45,9 @@ public class CompartimentController {
     //post compartiment : /compartiment
     @PostMapping("/compartiment")
     @ResponseBody
-    public ResponseEntity<Object> createCompartiment(@RequestBody CompartimentRequestDTO compartimentRequestDTO) {
+    public ResponseEntity<Object> createCompartiment(@Valid @RequestBody CompartimentCreateDTO compartimentCreateDTO) {
         try {
-            Compartiment createdCompartiment = compartimentService.createCompartiment(compartimentRequestDTO);
+            Compartiment createdCompartiment = compartimentService.createCompartiment(compartimentCreateDTO);
             return new ResponseEntity<>(createdCompartiment, HttpStatus.CREATED);
 
         } catch (Exception e) {
@@ -70,10 +72,10 @@ public class CompartimentController {
     }
 
     @PutMapping("/compartiment/{id}")
-    public ResponseEntity<Object> updateCompartimentById(@PathVariable Integer id,@RequestBody CompartimentRequestDTO compartimentRequestDTO) {
+    public ResponseEntity<Object> updateCompartimentById(@PathVariable Integer id,@RequestBody CompartimentUpdateDTO compartimentUpdateDTO) {
 
         try {
-            Compartiment updatedCompartiment = compartimentService.updateCompartimentById(id,compartimentRequestDTO);
+            Compartiment updatedCompartiment = compartimentService.updateCompartimentById(id, compartimentUpdateDTO);
             return new ResponseEntity<>(updatedCompartiment, HttpStatus.OK);
         } catch (NoSuchElementException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found

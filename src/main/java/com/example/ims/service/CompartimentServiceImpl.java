@@ -2,10 +2,9 @@ package com.example.ims.service;
 
 
 import com.example.ims.dao.CompartimentRepository;
-import com.example.ims.dto.CompartimentRequestDTO;
+import com.example.ims.dto.CompartimentCreateDTO;
+import com.example.ims.dto.CompartimentUpdateDTO;
 import com.example.ims.model.Compartiment;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,11 +24,11 @@ public class CompartimentServiceImpl implements CompartimentService {
     }
 
     @Override
-    public Compartiment createCompartiment(CompartimentRequestDTO compartimentRequestDTO) {
+    public Compartiment createCompartiment(CompartimentCreateDTO compartimentCreateDTO) {
         Compartiment compartiment = new Compartiment();
-        compartiment.setName(compartimentRequestDTO.getName());
-        compartiment.setCapacity(compartimentRequestDTO.getCapacity());
-        compartiment.setAvailablePlace(compartimentRequestDTO.getAvailablePlace());
+        compartiment.setName(compartimentCreateDTO.getName());
+        compartiment.setCapacity(compartimentCreateDTO.getCapacity());
+        compartiment.setAvailablePlace(compartimentCreateDTO.getAvailablePlace());
 
         return compartimentRepository.save(compartiment);
     }
@@ -44,19 +43,19 @@ public class CompartimentServiceImpl implements CompartimentService {
     }
 
     @Override
-    public Compartiment updateCompartimentById(Integer id,CompartimentRequestDTO compartimentRequestDTO){
+    public Compartiment updateCompartimentById(Integer id, CompartimentUpdateDTO compartimentUpdateDTO){
         Compartiment compartiment = compartimentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Compartiment with id " + id + " not found"));
 
         // Update fields
-        if (compartimentRequestDTO.getName() != null) {
-            compartiment.setName(compartimentRequestDTO.getName());
+        if (compartimentUpdateDTO.getName() != null) {
+            compartiment.setName(compartimentUpdateDTO.getName());
         }
-        if (compartimentRequestDTO.getCapacity() != null) {
-            compartiment.setCapacity(compartimentRequestDTO.getCapacity());
+        if (compartimentUpdateDTO.getCapacity() != null) {
+            compartiment.setCapacity(compartimentUpdateDTO.getCapacity());
         }
-        if (compartimentRequestDTO.getAvailablePlace() != null) {
-            compartiment.setAvailablePlace(compartimentRequestDTO.getAvailablePlace());
+        if (compartimentUpdateDTO.getAvailablePlace() != null) {
+            compartiment.setAvailablePlace(compartimentUpdateDTO.getAvailablePlace());
         }
 
         return compartimentRepository.save(compartiment);
