@@ -84,5 +84,30 @@ public class EmployeeControllerUnitTest {
                 .andExpect(status().isCreated());
     }
 
+    // unit test for updateEmployee
+    @Test
+    void updateEmployee() throws Exception {
+        // Set up the employeePost object
+        employeePost.setFullName("Jane Doe");
+        employeePost.setEmail("jane.doe@mail.com");
+        employeePost.setAddress("5678 Main St");
+
+        // Create a new Employee object to be returned by the mock service
+        Employee updatedEmployee = new Employee();
+        updatedEmployee.setId(1);
+        updatedEmployee.setFullName("Dane Doe");
+        updatedEmployee.setEmail("dane.doe@mail.com");
+        updatedEmployee.setAddress("5678 Main St");
+
+        // Mock the employeeService.updateEmployee method
+        when(employeeService.updateEmployeeById(1, employeePost)).thenReturn(updatedEmployee);
+
+        // Perform the PUT request
+        mockMvc.perform(put("/employee/1")
+                        .contentType("application/json")
+                        .content("{\"fullName\":\"Dane Doe\",\"email\":\"test@test@fr\",\"address\":\"5678 Main St\"}"))
+                .andExpect(status().isOk());
+
+    }
 
 }
