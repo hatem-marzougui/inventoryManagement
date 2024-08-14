@@ -110,4 +110,21 @@ public class EmployeeControllerUnitTest {
 
     }
 
+    //unit test for deleteEmployee
+    @Test
+    void deleteEmployee() throws Exception {
+        // Create a new Employee object to be returned by the mock service
+        Employee deletedEmployee = new Employee();
+        deletedEmployee.setId(1);
+        deletedEmployee.setFullName("Jane Doe");
+        deletedEmployee.setEmail("jane.doe@mail.com");
+        deletedEmployee.setAddress("5678 Main St");
+
+        // Mock the employeeService.deleteEmployeeById method
+        when(employeeService.deleteEmployeeById(1)).thenReturn(deletedEmployee);
+
+        // Perform the DELETE request
+        mockMvc.perform(delete("/employee/1")).andExpect(status().isOk());
+
+    }
 }
