@@ -4,6 +4,7 @@ import com.example.ims.dto.EmployeeGetDTO;
 import com.example.ims.dto.EmployeePostDTO;
 import com.example.ims.model.Employee;
 import com.example.ims.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class EmployeeController {
     }
 
     //get employees : /employees
-    @GetMapping("/employee")
+    @GetMapping("/employees")
     @ResponseBody
     public ResponseEntity<Object> getAllEmployees() {
         try {
@@ -41,7 +42,7 @@ public class EmployeeController {
     //post employee : /employee
     @PostMapping("/employee")
     @ResponseBody
-    public ResponseEntity<Object> createEmployee(@RequestBody EmployeePostDTO employeePostDto) {
+    public ResponseEntity<Object> createEmployee(@Valid @RequestBody EmployeePostDTO employeePostDto) {
         try {
             Employee createdEmployee = employeeService.createEmployee(employeePostDto);
             return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);

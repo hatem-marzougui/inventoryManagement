@@ -1,17 +1,22 @@
 package com.example.ims.dto;
 
-import java.util.List;
+
+import jakarta.validation.constraints.NotNull;
 
 public class EmployeeGetDTO {
+
+    @NotNull
     private Integer id;
 
+    @NotNull
     private String fullName;
 
+    @NotNull
     private String email;
 
+    @NotNull
     private String address;
 
-    private List<Integer> transactions;
 
     public EmployeeGetDTO() {
     }
@@ -24,13 +29,7 @@ public class EmployeeGetDTO {
         this.id = id;
     }
 
-    public List<Integer> getTransactions() {
-        return transactions;
-    }
 
-    public void setTransactions(List<Integer> transactions) {
-        this.transactions = transactions;
-    }
 
     public String getAddress() {
         return address;

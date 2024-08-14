@@ -1,5 +1,6 @@
 package com.example.ims.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class Employee {
     //one to many relationship with the transaction
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
+    @JsonBackReference
     private List<Transaction> transactions;
 
     public Employee() {

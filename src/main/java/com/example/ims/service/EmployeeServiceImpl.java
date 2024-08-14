@@ -21,6 +21,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
+
     @Override
     public List<EmployeeGetDTO> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
@@ -34,23 +35,37 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeGetDTO.setFullName(employee.getFullName());
             employeeGetDTO.setEmail(employee.getEmail());
             employeeGetDTO.setAddress(employee.getAddress());
-            for(int i = 0; i < employee.getTransactions().size(); i++){
-                employeeGetDTO.getTransactions().add(employee.getTransactions().get(i).getId());
-            }
-            // habdle null pointer exception
+
+            // handle null pointer exception
             /*
-            This code attempts to add an EmployeeGetDTO object to the employeeGetDTOList.
-            If employeeGetDTOList is null, a NullPointerException will be thrown.
-            The catch block handles this exception by initializing employeeGetDTOList with a single-element list containing the employeeGetDTO object.
-                Pseudocode:
-                Try to add employeeGetDTO to employeeGetDTOList.
-                If employeeGetDTOList is null, catch the NullPointerException.
-                Initialize employeeGetDTOList with a list containing employeeGetDTO.
+            *The catch part in the provided code is designed to handle a potential `NullPointerException` that might occur when adding an `EmployeeGetDTO` object to the `employeeGetDTOList`. Here is a step-by-step explanation:
+
+1. **Try Block**:
+    - The code attempts to add an `EmployeeGetDTO` object to the `employeeGetDTOList` using `employeeGetDTOList.add(employeeGetDTO);`.
+
+2. **Catch Block**:
+    - If `employeeGetDTOList` is `null`, attempting to call `add` on it will throw a `NullPointerException`.
+    - The catch block catches this exception and initializes `employeeGetDTOList` with a new list containing the single `employeeGetDTO` object: `employeeGetDTOList = List.of(employeeGetDTO);`.
+
+3. **Purpose**:
+    - This ensures that if `employeeGetDTOList` was `null` for some reason, it gets initialized properly, and the `employeeGetDTO` object is added to it.
+
+Here is the relevant part of the code for reference:
+
+```java
+try {
+    employeeGetDTOList.add(employeeGetDTO);
+} catch (NullPointerException e) {
+    employeeGetDTOList = List.of(employeeGetDTO);
+}
+```
+
+In summary, the catch block ensures that the list is properly initialized and populated even if it was initially `null`.
              */
             try {
                 employeeGetDTOList.add(employeeGetDTO);
             } catch (NullPointerException e) {
-                employeeGetDTOList = List.of(employeeGetDTO);
+                employeeGetDTOList = new ArrayList<>(List.of(employeeGetDTO));
             }
         }
         return employeeGetDTOList;
@@ -60,13 +75,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee createEmployee(EmployeePostDTO employeePostDto) {
         Employee employee = new Employee();
         //set fields if not null
-        if (employeePostDto.getFullName() != null && employeePostDto.getEmail() != null && employeePostDto.getAddress() != null) {
             employee.setFullName(employeePostDto.getFullName());
             employee.setEmail(employeePostDto.getEmail());
             employee.setAddress(employeePostDto.getAddress());
-        }else {
-            throw new IllegalArgumentException("All fields are required");
-        }
+
         return employeeRepository.save(employee);
     }
 
@@ -74,14 +86,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployeeById(Integer id, EmployeePostDTO employeePostDto) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Employee with id " + id + " not found"));
 
-        // Update fields
-       if (employeePostDto.getFullName() != null && employeePostDto.getEmail() != null && employeePostDto.getAddress() != null) {
             employee.setFullName(employeePostDto.getFullName());
             employee.setEmail(employeePostDto.getEmail());
             employee.setAddress(employeePostDto.getAddress());
-        }else {
-           throw new IllegalArgumentException("All fields are required");
-       }
+
 
         return employeeRepository.save(employee);
     }
