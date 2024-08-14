@@ -7,8 +7,4 @@ import java.util.List;
 
 public interface CompartimentRepository extends JpaRepository<Compartiment, Integer> {
 
-
-
-
-
 }
