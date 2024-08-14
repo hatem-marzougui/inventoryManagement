@@ -1,6 +1,6 @@
 package com.example.ims.dto;
 
-public class CompartimentRequestDTO {
+public class CompartimentUpdateDTO {
     private String name;
     private Integer capacity;
     private Integer availablePlace;
