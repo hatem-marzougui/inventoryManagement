@@ -29,6 +29,9 @@ jobs:
 
        - name: Permission Gradle
          run: chmod +x gradlew
+         # setup MySQL variables
+       - name: Set DATABASE_URL
+         run: echo "DATABASE_URL=jdbc:mysql://localhost:3306/ims_db" >> $GITHUB_ENV
 
        - name: Execute Gradle Tests
          run: ./gradlew  test
