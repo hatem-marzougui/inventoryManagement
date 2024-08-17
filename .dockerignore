@@ -1,0 +1,9 @@
+.git
+*.md
+.cache
+**/target
+.env
+**/.idea
+.gitignore
+**/.github
+**/build
