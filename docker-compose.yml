@@ -1,0 +1,38 @@
+
+version: '0.0.1'
+
+networks:
+  app-network:
+
+services:
+
+  mysql:
+    image: mysql:latest
+    container_name: ims_db_container
+    environment:
+      MYSQL_DATABASE: ims_db
+      MYSQL_ROOT_PASSWORD: adams
+    ports:
+      - "3333:3306"
+    volumes:
+      - data:/var/lib/mysql/
+    networks:
+      - app-network
+
+  backend:
+    container_name: ims_backend_container
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://ims_db_container:3306/ims_db
+      SPRING_DATASOURCE_PASSWORD: adams
+    networks:
+      - app-network
+
+volumes:
+  data:
